@@ -1,4 +1,3 @@
-// src/hooks/useMovieThumbnail.ts
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -13,7 +12,7 @@ export const useMovieThumbnail = (movieName: string) => {
   useEffect(() => {
     const fetchThumbnail = async () => {
       try {
-        const response = await axios.get(`http://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${thumbnailProviderKey}`);
+        const response = await axios.get(`https://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${thumbnailProviderKey}`);
         if (response.data.Poster) {
           setThumbnail(response.data.Poster);
         } else {
