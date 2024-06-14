@@ -2,7 +2,7 @@ import { Box } from '@mui/system';
 import { useState } from 'react';
 
 import { HistoryItem } from './HistoryItem';
-import { StyledBoxContainer, StyledButton, StyledDescription, StyledHistoryItem, StyledTitle } from './styles/searchHistoryStyles';
+import { StyledBoxContainer, StyledButton, StyledDescription, StyledHistoryItem, StyledTitle } from './styles/recommendationsHistoryStyles';
 import TypographyText from '@app/components/base/TypographyText';
 import MovieThumbnail from '@app/components/MovieThumbnail';
 import { RecommendationsHistoryItem } from '@app/components/types/RecommendationsHistoryItem';

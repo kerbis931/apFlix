@@ -16,7 +16,7 @@ describe('/api/history API Endpoint', () => {
     await dbConnect();
   });
 
-  it('should return search history', async () => {
+  it('should return search recommendations history', async () => {
     const { req, res } = createMocks<ExtendedRequest, NextApiResponse>({
       method: 'GET'
     });

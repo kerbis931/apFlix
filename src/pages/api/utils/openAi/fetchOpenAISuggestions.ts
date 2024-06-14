@@ -18,18 +18,18 @@ export const fetchOpenAISuggestionsUsingEmbedding = async (userDescription: stri
   const documents = await splitHtmlDocuments(extractedImdbUrls);
   const generateMovieRecommendationPrompt = getMainMovieRecommendationPrompt(moviesList);
   const finalPrompt = ChatPromptTemplate.fromTemplate(generateMovieRecommendationPrompt);
-  const chain = await createStuffDocumentsChain({
+  const combineDocsChain = await createStuffDocumentsChain({
     llm: model,
     prompt: finalPrompt
   });
 
-  const vectorStore = await createEmbeddings(documents);
-  const retriever = vectorStore.asRetriever({
+  const vectors = await createEmbeddings(documents);
+  const retriever = vectors.asRetriever({
     k: 1
   });
 
   const retrieverChain = await createRetrievalChain({
-    combineDocsChain: chain,
+    combineDocsChain: combineDocsChain,
     retriever: retriever
   });
 
