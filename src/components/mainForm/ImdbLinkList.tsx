@@ -1,4 +1,3 @@
-// src/components/chatForm/ImdbLinkList.tsx
 import { Divider } from '@mui/material';
 
 import { StyledDivider, StyledLink, StyledLinkContainer, StyledPaper, StyledTypography } from './styles/imdbLinkListStyles';

@@ -1,8 +1,8 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
 
-import { SearchHistoryItem } from '@app/components/chatForm/types/SearchHistoryItem';
+import { RecommendationsHistoryItem } from '@app/components/types/RecommendationsHistoryItem';
 
-export function HistoryItem({ open, handleClose, selectedItem }: { open: boolean; handleClose: () => void; selectedItem: SearchHistoryItem | null }) {
+export function HistoryItem({ open, handleClose, selectedItem }: { open: boolean; handleClose: () => void; selectedItem: RecommendationsHistoryItem | null }) {
   return (
     <Dialog id="history-modal" open={open} onClose={handleClose}>
       <DialogTitle id="description-dialog-title">Recommendation Details</DialogTitle>

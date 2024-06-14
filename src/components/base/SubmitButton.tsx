@@ -3,11 +3,10 @@ import { Button } from '@mui/material';
 
 type SubmitButtonProps = {
   onClick: () => void;
-  children: React.ReactNode;
 };
 const chatSubmitButtonColor = '#003366';
 const submitButtonColor = '#FFCC00';
-const SubmitButton = ({ onClick, children }: SubmitButtonProps) => {
+const SubmitButton = ({ onClick }: SubmitButtonProps) => {
   return (
     <Button
       id="submit-button"
@@ -23,7 +22,7 @@ const SubmitButton = ({ onClick, children }: SubmitButtonProps) => {
         fontSize: '16px'
       }}
     >
-      {children}
+      Suggest a movie
     </Button>
   );
 };

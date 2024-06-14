@@ -1,4 +1,3 @@
-// src/components/chatForm/styles/imdbLinkListStyles.ts
 import { Box, Link, Paper, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 

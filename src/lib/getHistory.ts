@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { SearchHistoryItem } from '@app/components/chatForm/types/SearchHistoryItem';
+import { RecommendationsHistoryItem } from '@app/components/types/RecommendationsHistoryItem';
 
 export async function getHistory() {
-  const res: { data: { history: SearchHistoryItem[] } } | undefined = await axios.get<{ history: SearchHistoryItem[] }>('/api/history');
+  const res: { data: { history: RecommendationsHistoryItem[] } } | undefined = await axios.get<{ history: RecommendationsHistoryItem[] }>('/api/history');
   return res;
 }

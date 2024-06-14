@@ -1,6 +1,6 @@
 import { model } from './fetchOpenAISuggestions';
-import { getSuggestionValidationPrompt } from './getPromptsWrappers';
-import { getGateKeeperPrompt } from './getPromptsWrappers';
+import { getSuggestionValidationPrompt } from './systemPromptsWrappers';
+import { getGateKeeperPrompt } from './systemPromptsWrappers';
 
 export const isSuggestionValid = async (suggestion: string): Promise<boolean> => {
   const chatMessages = getSuggestionValidationPrompt(suggestion);

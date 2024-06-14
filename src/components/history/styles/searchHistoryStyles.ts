@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 
-import TypographyText from '@app/components/common/base/TypographyText';
+import TypographyText from '@app/components/base/TypographyText';
 
 export const StyledBoxContainer = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(4),

@@ -1,17 +1,17 @@
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import { Box, CircularProgress, Grid } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import ImdbLinkList from './ImdbLinkList';
 import MovieRecommendation from './MovieRecommendation';
 import { appColor, gridContainerStyles, StyledBox } from './styles/movieSuggestionFormStyles';
-import SubmitButton from './SubmitButton';
-import { SearchHistoryItem } from './types/SearchHistoryItem';
 import WelcomeMessage from './WelcomeMessage';
-import FormContainer from '@app/components/common/base/FormContainer';
-import InputField from '@app/components/common/base/InputField';
-import TypographyText from '@app/components/common/base/TypographyText';
-import { RecommendationHistory } from '@app/components/history/SearchHistory';
+import FormContainer from '@app/components/base/FormContainer';
+import InputField from '@app/components/base/InputField';
+import SubmitButton from '@app/components/base/SubmitButton';
+import TypographyText from '@app/components/base/TypographyText';
+import { RecommendationHistory } from '@app/components/history/RecommendationHistory';
+import { useMovieForm } from '@app/hooks/useMovieForm';
 import { getHistory } from '@app/lib/getHistory';
 import { handleSuggestion } from '@app/lib/handleSuggestion';
 
@@ -19,28 +19,14 @@ const MovieSuggestionForm: React.FC = () => {
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
-  const [history, setHistory] = useState<SearchHistoryItem[]>([]);
-  const [extractedImdbUrls, setExtractedImdbUrls] = useState<string[]>([]);
-
-  useEffect(() => {
-    const fetchHistory = async () => {
-      const res = await getHistory();
-      setHistory((res && res.data.history) || []);
-    };
-    fetchHistory();
-  }, []);
-
-  useEffect(() => {
-    const imdbUrlPattern = /(https?:\/\/(?:www\.)?imdb\.com\/title\/tt[0-9]+)/g;
-    const urls = userInput.match(imdbUrlPattern) || [];
-    setExtractedImdbUrls(urls);
-  }, [userInput]);
+  const { history, extractedImdbUrls, setHistory } = useMovieForm(userInput, response);
 
   const handleSuggestClick = async () => {
     setLoading(true);
-    await handleSuggestion(userInput, setResponse, extractedImdbUrls);
-    const res = await getHistory();
-    setHistory((res && res.data.history) || []);
+    const suggestion = await handleSuggestion(userInput, extractedImdbUrls);
+    setResponse(suggestion);
+    const historyResponse = await getHistory();
+    setHistory((historyResponse && historyResponse.data.history) || []);
     setLoading(false);
   };
 
@@ -58,7 +44,7 @@ const MovieSuggestionForm: React.FC = () => {
             <InputField label="Describe your preferences" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
           </Box>
           <Box mb={2} display="flex" justifyContent="center">
-            <SubmitButton onClick={handleSuggestClick}>Suggest a movie</SubmitButton>
+            <SubmitButton onClick={handleSuggestClick}></SubmitButton>
           </Box>
           {loading ? (
             <Box display="flex" justifyContent="center" mt={2}>

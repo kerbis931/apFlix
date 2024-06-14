@@ -5,8 +5,8 @@ import { createStuffDocumentsChain } from 'langchain/chains/combine_documents';
 import { createRetrievalChain } from 'langchain/chains/retrieval';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 
-import { getMainMovieRecommendationPrompt } from './getPromptsWrappers';
 import { splitHtmlDocuments } from './htmlHelpers';
+import { getMainMovieRecommendationPrompt } from './systemPromptsWrappers';
 import { moviesList } from '@app/pages/api/data/moviesList';
 
 export const model = new ChatOpenAI({
@@ -16,16 +16,18 @@ export const model = new ChatOpenAI({
 
 export const fetchOpenAISuggestionsUsingEmbedding = async (userDescription: string, extractedImdbUrls: string[]): Promise<string> => {
   const documents = await splitHtmlDocuments(extractedImdbUrls);
-  const prompt = ChatPromptTemplate.fromTemplate(getMainMovieRecommendationPrompt(moviesList));
+  const generateMovieRecommendationPrompt = getMainMovieRecommendationPrompt(moviesList);
+  const finalPrompt = ChatPromptTemplate.fromTemplate(generateMovieRecommendationPrompt);
   const chain = await createStuffDocumentsChain({
     llm: model,
-    prompt: prompt
+    prompt: finalPrompt
   });
 
   const vectorStore = await createEmbeddings(documents);
   const retriever = vectorStore.asRetriever({
     k: 1
   });
+
   const retrieverChain = await createRetrievalChain({
     combineDocsChain: chain,
     retriever: retriever

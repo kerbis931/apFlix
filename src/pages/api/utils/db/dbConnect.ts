@@ -11,7 +11,6 @@ interface MongooseCache {
   promise: Promise<Mongoose> | null;
 }
 
-// Ensure global.mongoose is properly initialized
 declare global {
   // eslint-disable-next-line no-var
   var mongoose: MongooseCache; // This must be var to work with the global scope

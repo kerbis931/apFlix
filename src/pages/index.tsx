@@ -1,7 +1,7 @@
 import { Box, Container, CssBaseline } from '@mui/material';
 import Head from 'next/head';
 
-import MovieSuggestionForm from '@app/components/chatForm/MovieSuggestionForm';
+import MovieSuggestionForm from '@app/components/mainForm/MainForm';
 
 export default function Home() {
   return (

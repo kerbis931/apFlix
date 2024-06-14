@@ -7,9 +7,11 @@
     "build": "next build --no-lint",
     "start": "next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write .",
     "test:e2e": "playwright test",
     "test:unit": "npm run lint && jest",
+    "allure": "allure serve",
     "allure:generate": "allure generate ./allure-results --clean -o ./report/allure-report",
     "allure:open": "allure open ./report/allure-report"
   },

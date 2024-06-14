@@ -3,13 +3,13 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 
-async function scrapeMovieName(html: string) {
+async function extractMovieName(html: string) {
   const $ = cheerio.load(html);
   const movieName = $('[data-testid="hero__primary-text"]').text().trim();
   return movieName || 'No title found';
 }
 
-async function scrapeMovieDescription(html: string) {
+async function extractMovieDescription(html: string) {
   const $ = cheerio.load(html);
   const movieDescription = $('[data-testid="plot"]').text().trim();
   const movieDescriptionLimitedTo1000Chars = movieDescription.slice(0, 1000);
@@ -22,8 +22,8 @@ export async function splitHtmlDocuments(urls: string[]): Promise<Document[]> {
     urls.map(async (url) => {
       try {
         const html = await getHtml(url);
-        const movieName = await scrapeMovieName(html);
-        const movieDescription = await scrapeMovieDescription(html);
+        const movieName = await extractMovieName(html);
+        const movieDescription = await extractMovieDescription(html);
         const stringOfInterest = `movie name: '${movieName}', movie description: ${movieDescription} @@@`;
         const doc = new Document({
           pageContent: stringOfInterest,

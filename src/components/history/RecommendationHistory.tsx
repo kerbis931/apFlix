@@ -1,18 +1,17 @@
-// src/components/history/SearchHistory.tsx
 import { Box } from '@mui/system';
 import { useState } from 'react';
 
 import { HistoryItem } from './HistoryItem';
 import { StyledBoxContainer, StyledButton, StyledDescription, StyledHistoryItem, StyledTitle } from './styles/searchHistoryStyles';
-import { SearchHistoryItem } from '@app/components/chatForm/types/SearchHistoryItem';
-import TypographyText from '@app/components/common/base/TypographyText';
-import MovieThumbnail from '@app/components/common/MovieThumbnail';
+import TypographyText from '@app/components/base/TypographyText';
+import MovieThumbnail from '@app/components/MovieThumbnail';
+import { RecommendationsHistoryItem } from '@app/components/types/RecommendationsHistoryItem';
 
-export function RecommendationHistory({ history }: { history: SearchHistoryItem[] }) {
+export function RecommendationHistory({ history }: { history: RecommendationsHistoryItem[] }) {
   const [open, setOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<SearchHistoryItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<RecommendationsHistoryItem | null>(null);
 
-  const handleClickOpen = (item: SearchHistoryItem) => {
+  const handleClickOpen = (item: RecommendationsHistoryItem) => {
     setSelectedItem(item);
     setOpen(true);
   };

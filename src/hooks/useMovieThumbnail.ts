@@ -18,7 +18,8 @@ export const useMovieThumbnail = (movieName: string) => {
 
       while (attempts < MAX_RETRIES && !success) {
         try {
-          const response = await axios.get(`https://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${thumbnailProviderKey}`);
+          const thumbnailApiUrl = `https://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${thumbnailProviderKey}`;
+          const response = await axios.get(thumbnailApiUrl);
           if (response.data.Poster) {
             setThumbnail(response.data.Poster);
             success = true;

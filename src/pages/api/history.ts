@@ -1,9 +1,8 @@
-// src/pages/api/history.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import SearchHistory from './models/SearchHistory';
 import dbConnect from './utils/db/dbConnect';
-import { SearchHistoryItem } from '@app/components/chatForm/types/SearchHistoryItem';
+import { RecommendationsHistoryItem } from '@app/components/types/RecommendationsHistoryItem';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   await dbConnect();
@@ -21,8 +20,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-async function getHistory(): Promise<SearchHistoryItem[]> {
-  const searchHistory = await SearchHistory.find().sort({ createdAt: -1 }).limit(4);
+const NUMBER_OF_HISTORY_ITEMS = 4;
+async function getHistory(): Promise<RecommendationsHistoryItem[]> {
+  const searchHistory = await SearchHistory.find().sort({ createdAt: -1 }).limit(NUMBER_OF_HISTORY_ITEMS);
   if (!searchHistory) {
     console.error('Search history not found');
     return [];
