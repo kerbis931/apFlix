@@ -40,3 +40,5 @@ allure-report/
 test-results/
 playwright-report/
 screenshots/
+report/test-results.json
+report/html/index.html

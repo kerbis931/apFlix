@@ -51,12 +51,3 @@ async function getHtml(url: string) {
   const res = await axios.get(url, { headers });
   return res.data;
 }
-
-// Test function
-async function testScraping() {
-  const testUrls = ['https://www.imdb.com/title/tt12747748/'];
-  const result = await splitHtmlDocuments(testUrls);
-  console.log(result);
-}
-
-testScraping();

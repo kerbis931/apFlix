@@ -1,5 +1,6 @@
-import { styled } from '@mui/system';
 import { Box, Button, Typography } from '@mui/material';
+import { styled } from '@mui/system';
+
 import TypographyText from '@app/components/common/base/TypographyText';
 
 export const StyledBoxContainer = styled(Box)(({ theme }) => ({
@@ -27,7 +28,7 @@ export const StyledHistoryItem = styled(Box)(({ theme }) => ({
   alignItems: 'center'
 }));
 
-export const StyledButton = styled(Button)(({ theme }) => ({
+export const StyledButton = styled(Button)(() => ({
   variant: 'outlined',
   size: 'small'
 }));

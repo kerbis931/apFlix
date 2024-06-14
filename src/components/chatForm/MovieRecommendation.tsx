@@ -1,8 +1,9 @@
 // src/components/chatForm/MovieRecommendation.tsx
-import MovieThumbnail from '@app/components/common/MovieThumbnail';
-import TypographyText from '@app/components/common/base/TypographyText';
 import React from 'react';
+
 import { StyledMovieDetails, StyledResponseBox } from './styles/movieRecommendationStyles';
+import TypographyText from '@app/components/common/base/TypographyText';
+import MovieThumbnail from '@app/components/common/MovieThumbnail';
 
 const getMovieName = (suggestion: string) => {
   const match = suggestion.match(/'([^']+)'/);
