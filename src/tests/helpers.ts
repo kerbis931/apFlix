@@ -7,7 +7,7 @@ export async function slowFill(page: Page, selector: string, text: string) {
 
 export async function slowClick(page: Page, selector: string) {
   await page.click(selector);
-  await page.waitForTimeout(2000); // wait for 1.5 seconds for demo purposes
+  await page.waitForTimeout(2000); // wait for 2 seconds for demo purposes
 }
 
 export async function fillPreferencesAndSubmit(page: Page, userInput: string) {

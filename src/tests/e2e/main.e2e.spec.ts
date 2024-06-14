@@ -24,6 +24,7 @@ test.describe('Main Form', () => {
   });
 
   test('should display correct history item', async ({ page }) => {
+    await page.reload();
     await fillPreferencesAndSubmit(page, userInput);
     await page.reload();
     await verifyCorrectHistoryItem(page, userInput);
