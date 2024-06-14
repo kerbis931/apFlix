@@ -3,10 +3,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import handler from '@app/pages/api/suggestionsEngine';
 import { saveLastSuggestionToDb } from '@app/pages/api/utils/db/saveLastSuggestionToDb';
 import { fetchOpenAISuggestionsUsingEmbedding } from '@app/pages/api/utils/openAi/fetchOpenAISuggestions';
+import { isSuggestionValid, isUserDescriptionValid } from '@app/pages/api/utils/openAi/prePostValidations';
 
 jest.mock('@app/pages/api/utils/openAi/fetchOpenAISuggestions');
 jest.mock('@app/pages/api/utils/db/saveLastSuggestionToDb');
-jest.mock('axios');
+jest.mock('@app/pages/api/utils/openAi/prePostValidations');
 
 describe('suggestions API', () => {
   let req: Partial<NextApiRequest>;
@@ -27,6 +28,8 @@ describe('suggestions API', () => {
 
   it('should return a suggestion when given valid input', async () => {
     (fetchOpenAISuggestionsUsingEmbedding as jest.Mock).mockResolvedValue('Mocked suggestion');
+    (isUserDescriptionValid as jest.Mock).mockResolvedValue(true);
+    (isSuggestionValid as jest.Mock).mockResolvedValue(true);
 
     await handler(req as NextApiRequest, res as NextApiResponse);
 
@@ -44,12 +47,12 @@ describe('suggestions API', () => {
     expect(res.json).toHaveBeenCalledWith({ error: 'User description is required' });
   });
 
-  it('should return 500 if an error occurs', async () => {
-    (fetchOpenAISuggestionsUsingEmbedding as jest.Mock).mockRejectedValue(new Error('Mocked error'));
+  it('should return 400 if user description is invalid', async () => {
+    (isUserDescriptionValid as jest.Mock).mockResolvedValue(false);
 
     await handler(req as NextApiRequest, res as NextApiResponse);
 
-    expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ error: 'An error occurred while fetching the recommendation' });
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid user description' });
   });
 });

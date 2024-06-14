@@ -4,7 +4,6 @@ import { ChatOpenAI, OpenAIEmbeddings } from '@langchain/openai';
 import { createStuffDocumentsChain } from 'langchain/chains/combine_documents';
 import { createRetrievalChain } from 'langchain/chains/retrieval';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
-import { ChatCompletionMessageParam } from 'openai/resources';
 
 import { getMainMovieRecommendationPrompt } from './getPromptsWrappers';
 import { splitHtmlDocuments } from './htmlHelpers';
@@ -15,7 +14,7 @@ export const model = new ChatOpenAI({
   temperature: 0.0
 });
 
-export const fetchOpenAISuggestionsUsingEmbedding = async (messages: ChatCompletionMessageParam[], extractedImdbUrls: string[]): Promise<string> => {
+export const fetchOpenAISuggestionsUsingEmbedding = async (userDescription: string, extractedImdbUrls: string[]): Promise<string> => {
   const documents = await splitHtmlDocuments(extractedImdbUrls);
   const prompt = ChatPromptTemplate.fromTemplate(getMainMovieRecommendationPrompt(moviesList));
   const chain = await createStuffDocumentsChain({
@@ -25,7 +24,7 @@ export const fetchOpenAISuggestionsUsingEmbedding = async (messages: ChatComplet
 
   const vectorStore = await createEmbeddings(documents);
   const retriever = vectorStore.asRetriever({
-    k: 10
+    k: 1
   });
   const retrieverChain = await createRetrievalChain({
     combineDocsChain: chain,
@@ -33,7 +32,7 @@ export const fetchOpenAISuggestionsUsingEmbedding = async (messages: ChatComplet
   });
 
   const response = await retrieverChain.invoke({
-    input: messages.map((msg) => msg.content).join('\n')
+    input: userDescription
   });
 
   return response?.answer || 'No recommendation found';
