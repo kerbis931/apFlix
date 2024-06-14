@@ -4,7 +4,7 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "no-relative-import-paths", "import"],
-  "ignorePatterns": ["./report"],
+  "ignorePatterns": ["./report", "ecosystem.config.js"],
   "rules": {
     "import/order": [
       "error",
