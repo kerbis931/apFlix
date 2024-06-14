@@ -1,9 +1,9 @@
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
-import { Box, CircularProgress, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import React, { useState } from 'react';
 
 import ImdbLinkList from './ImdbLinkList';
-import MovieRecommendation from './MovieRecommendation';
+import RenderMovieRecommendation from './LoadingOrRecommendations';
 import { appColor, gridContainerStyles, StyledBox } from './styles/movieSuggestionFormStyles';
 import WelcomeMessage from './WelcomeMessage';
 import FormContainer from '@app/components/base/FormContainer';
@@ -38,23 +38,11 @@ const MovieSuggestionForm: React.FC = () => {
       </StyledBox>
       <ImdbLinkList extractedImdbUrls={extractedImdbUrls} />
       <Grid container sx={gridContainerStyles}>
-        <Grid item xs={12} md={12}>
-          <WelcomeMessage />
-          <Box mb={2}>
-            <InputField label="Describe your preferences" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
-          </Box>
-          <Box mb={2} display="flex" justifyContent="center">
-            <SubmitButton onClick={handleSuggestClick}></SubmitButton>
-          </Box>
-          {loading ? (
-            <Box display="flex" justifyContent="center" mt={2}>
-              <CircularProgress />
-            </Box>
-          ) : (
-            response && <MovieRecommendation suggestion={response} />
-          )}
-          <RecommendationHistory history={history} />
-        </Grid>
+        <WelcomeMessage />
+        <InputField label="Describe your preferences" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+        <SubmitButton onClick={handleSuggestClick}></SubmitButton>
+        <RenderMovieRecommendation loading={loading} response={response} />
+        <RecommendationHistory history={history} />
       </Grid>
     </FormContainer>
   );

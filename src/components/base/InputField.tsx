@@ -23,7 +23,8 @@ const InputField = ({ label, value, onChange }: InputFieldProps) => {
         style: {
           backgroundColor: fieldBackgroundColor,
           borderRadius: '5px',
-          marginTop: '1rem'
+          marginTop: '0.5rem',
+          marginBottom: '1rem'
         },
         inputProps: {
           maxLength: 1000
