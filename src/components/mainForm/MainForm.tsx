@@ -37,7 +37,7 @@ const MovieSuggestionForm: React.FC = () => {
         <TypographyText variant="h3">APFlix</TypographyText>
       </StyledBox>
       <ImdbLinkList extractedImdbUrls={extractedImdbUrls} />
-      <Grid container sx={gridContainerStyles}>
+      <Grid container sx={gridContainerStyles} direction="column" alignItems="center">
         <WelcomeMessage />
         <InputField label="Describe your preferences" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
         <SubmitButton onClick={handleSuggestClick}></SubmitButton>
