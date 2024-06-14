@@ -1,12 +1,12 @@
 // src/components/history/SearchHistory.tsx
+import { Box } from '@mui/system';
 import { useState } from 'react';
 
 import { HistoryItem } from './HistoryItem';
+import { StyledBoxContainer, StyledButton, StyledDescription, StyledHistoryItem, StyledTitle } from './styles/searchHistoryStyles';
 import { SearchHistoryItem } from '@app/components/chatForm/types/SearchHistoryItem';
 import TypographyText from '@app/components/common/base/TypographyText';
 import MovieThumbnail from '@app/components/common/MovieThumbnail';
-import { StyledBoxContainer, StyledTitle, StyledDescription, StyledHistoryItem, StyledButton } from './styles/searchHistoryStyles';
-import { Box } from '@mui/system';
 
 export function SearchHistory({ history }: { history: SearchHistoryItem[] }) {
   const [open, setOpen] = useState(false);
@@ -35,7 +35,6 @@ export function SearchHistory({ history }: { history: SearchHistoryItem[] }) {
       {Array.isArray(history) &&
         history.slice(0, 10).map((item, index) => {
           const movieName = getMovieName(item.suggestion);
-
           return (
             <StyledHistoryItem key={index}>
               <Box display="flex" alignItems="center">

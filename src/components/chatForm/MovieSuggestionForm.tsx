@@ -1,10 +1,10 @@
-// src/components/chatForm/MovieSuggestionForm.tsx
-import React, { useEffect, useState } from 'react';
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import { Box, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 
 import ImdbLinkList from './ImdbLinkList';
 import MovieRecommendation from './MovieRecommendation';
+import { appColor, gridContainerStyles, StyledBox } from './styles/movieSuggestionFormStyles';
 import SubmitButton from './SubmitButton';
 import { SearchHistoryItem } from './types/SearchHistoryItem';
 import WelcomeMessage from './WelcomeMessage';
@@ -14,7 +14,6 @@ import TypographyText from '@app/components/common/base/TypographyText';
 import { SearchHistory } from '@app/components/history/SearchHistory';
 import { getHistory } from '@app/lib/getHistory';
 import { handleSuggestion } from '@app/lib/handleSuggestion';
-import { StyledBox, gridContainerStyles, appColor } from './styles/movieSuggestionFormStyles';
 
 const MovieSuggestionForm: React.FC = () => {
   const [userInput, setUserInput] = useState('');

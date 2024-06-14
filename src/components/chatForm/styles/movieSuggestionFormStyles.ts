@@ -1,6 +1,5 @@
-// src/components/chatForm/styles/movieSuggestionFormStyles.ts
-import { styled } from '@mui/system';
 import { Box } from '@mui/material';
+import { styled } from '@mui/system';
 
 export const StyledBox = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(2),
