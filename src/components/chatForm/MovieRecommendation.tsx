@@ -7,7 +7,6 @@ import MovieThumbnail from '@app/components/common/MovieThumbnail';
 
 const getMovieName = (suggestion: string) => {
   const match = suggestion.match(/'([^']+)'/);
-
   return match ? match[1] : 'No Recommendation';
 };
 

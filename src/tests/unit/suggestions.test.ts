@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import handler from '@app/pages/api/suggestionsEngine';
 import { saveLastSuggestionToDb } from '@app/pages/api/utils/db/saveLastSuggestionToDb';
-import { fetchOpenAISuggestions } from '@app/pages/api/utils/openAi/fetchOpenAISuggestions';
+import { fetchOpenAISuggestionsUsingEmbedding } from '@app/pages/api/utils/openAi/fetchOpenAISuggestions';
 
 jest.mock('@app/pages/api/utils/openAi/fetchOpenAISuggestions');
 jest.mock('@app/pages/api/utils/db/saveLastSuggestionToDb');
@@ -26,7 +26,7 @@ describe('suggestions API', () => {
   });
 
   it('should return a suggestion when given valid input', async () => {
-    (fetchOpenAISuggestions as jest.Mock).mockResolvedValue('Mocked suggestion');
+    (fetchOpenAISuggestionsUsingEmbedding as jest.Mock).mockResolvedValue('Mocked suggestion');
 
     await handler(req as NextApiRequest, res as NextApiResponse);
 
@@ -45,7 +45,7 @@ describe('suggestions API', () => {
   });
 
   it('should return 500 if an error occurs', async () => {
-    (fetchOpenAISuggestions as jest.Mock).mockRejectedValue(new Error('Mocked error'));
+    (fetchOpenAISuggestionsUsingEmbedding as jest.Mock).mockRejectedValue(new Error('Mocked error'));
 
     await handler(req as NextApiRequest, res as NextApiResponse);
 

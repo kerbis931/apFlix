@@ -7,7 +7,7 @@ type InputFieldProps = {
 };
 
 const fieldBackgroundColor = 'rgba(255,255,255,0.8)';
-const inputLabelColor = 'black';
+const inputLabelColor = '#A12568';
 const InputField = ({ label, value, onChange }: InputFieldProps) => {
   return (
     <TextField

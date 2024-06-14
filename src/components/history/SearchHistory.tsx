@@ -25,7 +25,7 @@ export function SearchHistory({ history }: { history: SearchHistoryItem[] }) {
   const getMovieName = (suggestion: string) => {
     const suggestionNamePattern = /'([^']+)'/;
     const match = suggestion.match(suggestionNamePattern);
-    return match ? match[1] : suggestion.split(' ').slice(0, 3).join(' ');
+    return match ? match[1] : null;
   };
 
   return (
@@ -35,6 +35,7 @@ export function SearchHistory({ history }: { history: SearchHistoryItem[] }) {
       {Array.isArray(history) &&
         history.slice(0, 10).map((item, index) => {
           const movieName = getMovieName(item.suggestion);
+          if (!movieName) return null;
           return (
             <StyledHistoryItem key={index}>
               <Box display="flex" alignItems="center">
@@ -42,7 +43,7 @@ export function SearchHistory({ history }: { history: SearchHistoryItem[] }) {
                 <TypographyText variant="body1">{movieName}</TypographyText>
               </Box>
               <StyledButton id={`history-${index}`} onClick={() => handleClickOpen(item)}>
-                View Description
+                DETAILS
               </StyledButton>
             </StyledHistoryItem>
           );

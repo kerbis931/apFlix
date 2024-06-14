@@ -1,5 +1,5 @@
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
-import { Box, Grid } from '@mui/material';
+import { Box, CircularProgress, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 import ImdbLinkList from './ImdbLinkList';
@@ -18,6 +18,7 @@ import { handleSuggestion } from '@app/lib/handleSuggestion';
 const MovieSuggestionForm: React.FC = () => {
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState<SearchHistoryItem[]>([]);
   const [extractedImdbUrls, setExtractedImdbUrls] = useState<string[]>([]);
 
@@ -36,9 +37,11 @@ const MovieSuggestionForm: React.FC = () => {
   }, [userInput]);
 
   const handleSuggestClick = async () => {
+    setLoading(true);
     await handleSuggestion(userInput, setResponse, extractedImdbUrls);
     const res = await getHistory();
     setHistory((res && res.data.history) || []);
+    setLoading(false);
   };
 
   return (
@@ -55,9 +58,15 @@ const MovieSuggestionForm: React.FC = () => {
             <InputField label="Describe your preferences" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
           </Box>
           <Box mb={2} display="flex" justifyContent="center">
-            <SubmitButton onClick={handleSuggestClick}>Suggest</SubmitButton>
+            <SubmitButton onClick={handleSuggestClick}>Suggest a movie</SubmitButton>
           </Box>
-          {response && <MovieRecommendation suggestion={response} />}
+          {loading ? (
+            <Box display="flex" justifyContent="center" mt={2}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            response && <MovieRecommendation suggestion={response} />
+          )}
           <SearchHistory history={history} />
         </Grid>
       </Grid>

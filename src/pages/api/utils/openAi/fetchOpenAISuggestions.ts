@@ -6,16 +6,16 @@ import { createRetrievalChain } from 'langchain/chains/retrieval';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { ChatCompletionMessageParam } from 'openai/resources';
 
+import { getMainMovieRecommendationPrompt } from './getPromptsWrappers';
 import { splitHtmlDocuments } from './htmlHelpers';
 import { moviesList } from '@app/pages/api/data/moviesList';
-import { getMainMovieRecommendationPrompt } from '@app/pages/api/utils/openAi/getMainMovieRecommendationPrompt';
 
-const model = new ChatOpenAI({
+export const model = new ChatOpenAI({
   modelName: 'gpt-4',
   temperature: 0.0
 });
 
-export const fetchOpenAISuggestions = async (messages: ChatCompletionMessageParam[], extractedImdbUrls: string[]): Promise<string> => {
+export const fetchOpenAISuggestionsUsingEmbedding = async (messages: ChatCompletionMessageParam[], extractedImdbUrls: string[]): Promise<string> => {
   const documents = await splitHtmlDocuments(extractedImdbUrls);
   const prompt = ChatPromptTemplate.fromTemplate(getMainMovieRecommendationPrompt(moviesList));
   const chain = await createStuffDocumentsChain({
@@ -45,4 +45,3 @@ const createEmbeddings = async (documents: Document[]): Promise<MemoryVectorStor
   return vectorStore;
 };
 
-// Test function to verify recommendation flow
