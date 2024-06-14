@@ -44,4 +44,3 @@ const createEmbeddings = async (documents: Document[]): Promise<MemoryVectorStor
   const vectorStore = await MemoryVectorStore.fromDocuments(documents, embeddings);
   return vectorStore;
 };
-
