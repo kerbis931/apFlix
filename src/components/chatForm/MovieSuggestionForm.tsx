@@ -11,7 +11,7 @@ import WelcomeMessage from './WelcomeMessage';
 import FormContainer from '@app/components/common/base/FormContainer';
 import InputField from '@app/components/common/base/InputField';
 import TypographyText from '@app/components/common/base/TypographyText';
-import { SearchHistory } from '@app/components/history/SearchHistory';
+import { RecommendationHistory } from '@app/components/history/SearchHistory';
 import { getHistory } from '@app/lib/getHistory';
 import { handleSuggestion } from '@app/lib/handleSuggestion';
 
@@ -67,7 +67,7 @@ const MovieSuggestionForm: React.FC = () => {
           ) : (
             response && <MovieRecommendation suggestion={response} />
           )}
-          <SearchHistory history={history} />
+          <RecommendationHistory history={history} />
         </Grid>
       </Grid>
     </FormContainer>

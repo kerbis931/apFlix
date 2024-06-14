@@ -8,7 +8,7 @@ import { SearchHistoryItem } from '@app/components/chatForm/types/SearchHistoryI
 import TypographyText from '@app/components/common/base/TypographyText';
 import MovieThumbnail from '@app/components/common/MovieThumbnail';
 
-export function SearchHistory({ history }: { history: SearchHistoryItem[] }) {
+export function RecommendationHistory({ history }: { history: SearchHistoryItem[] }) {
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<SearchHistoryItem | null>(null);
 
