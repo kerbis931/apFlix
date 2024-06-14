@@ -25,7 +25,7 @@ export const fetchOpenAISuggestionsUsingEmbedding = async (messages: ChatComplet
 
   const vectorStore = await createEmbeddings(documents);
   const retriever = vectorStore.asRetriever({
-    k: 1
+    k: 10
   });
   const retrieverChain = await createRetrievalChain({
     combineDocsChain: chain,

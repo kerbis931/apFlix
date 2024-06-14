@@ -12,7 +12,8 @@ async function scrapeMovieName(html: string) {
 async function scrapeMovieDescription(html: string) {
   const $ = cheerio.load(html);
   const movieDescription = $('[data-testid="plot"]').text().trim();
-  return movieDescription || 'No description found';
+  const movieDescriptionLimitedTo1000Chars = movieDescription.slice(0, 1000);
+  return movieDescriptionLimitedTo1000Chars || 'No description found';
 }
 
 export async function splitHtmlDocuments(urls: string[]): Promise<Document[]> {
@@ -20,18 +21,16 @@ export async function splitHtmlDocuments(urls: string[]): Promise<Document[]> {
   await Promise.all(
     urls.map(async (url) => {
       try {
-        const res = await getHtml(url);
-        const movieName = await scrapeMovieName(res);
-        const movieDescription = await scrapeMovieDescription(res);
-        const stringOfInterest = `${movieName} - the description: ${movieDescription} @@@`;
+        const html = await getHtml(url);
+        const movieName = await scrapeMovieName(html);
+        const movieDescription = await scrapeMovieDescription(html);
+        const stringOfInterest = `movie name: '${movieName}', movie description: ${movieDescription} @@@`;
         const doc = new Document({
           pageContent: stringOfInterest,
           metadata: { name: movieName, url: url }
         });
         // Split the document into smaller documents
         const docSplit = new RecursiveCharacterTextSplitter({
-          chunkSize: 400,
-          chunkOverlap: 20,
           separators: ['@@@']
         });
         const splitDocs = await docSplit.splitDocuments([doc]);

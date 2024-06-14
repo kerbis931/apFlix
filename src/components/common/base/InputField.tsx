@@ -24,6 +24,9 @@ const InputField = ({ label, value, onChange }: InputFieldProps) => {
           backgroundColor: fieldBackgroundColor,
           borderRadius: '5px',
           marginTop: '1rem'
+        },
+        inputProps: {
+          maxLength: 1000
         }
       }}
       InputLabelProps={{

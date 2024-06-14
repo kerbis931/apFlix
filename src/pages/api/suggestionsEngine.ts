@@ -27,16 +27,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'User description is required' });
   }
   let suggestion;
+  const userDescriptionLimitedTo1000Chars = userDescription.slice(0, 1000);
 
   try {
-    const isValidPrompt = await isUserDescriptionValid(userDescription);
+    const isValidPrompt = await isUserDescriptionValid(userDescriptionLimitedTo1000Chars);
     if (!isValidPrompt) {
       return res.status(400).json({ error: 'Invalid user description' });
     }
-    const messagesWithPrompt = generatePromptedMessages(userDescription, moviesList);
+    const messagesWithPrompt = generatePromptedMessages(userDescriptionLimitedTo1000Chars, moviesList);
     suggestion = await fetchOpenAISuggestionsUsingEmbedding(messagesWithPrompt, extractedImdbUrls);
     if (await isSuggestionValid(suggestion)) {
-      await saveLastSuggestionToDb(suggestion, userDescription);
+      await saveLastSuggestionToDb(suggestion, userDescriptionLimitedTo1000Chars);
       res.status(200).json({ suggestion: suggestion });
     } else {
       res.status(200).json({ suggestion: 'No valid recommendation found' });
