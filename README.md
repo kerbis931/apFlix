@@ -35,7 +35,7 @@ The view is integrated with movie thumbnails from OMDB API.
 
 ## Development
 1. Clone the repository 
-2. Fill the keys for 
+2. Fill the keys in `.env` for 
 ```bash
 OPENAI_API_KEY=ADD_YOUR_OPEN_AI #For LLM recommendations
 OMDB_API_KEY=ADD_YOUR_OMDB #For movie thumbnail
@@ -50,14 +50,14 @@ go to http://localhost:3000
 
 4. Testing
 ```bash
-npm run test:e2e //for e2e testing
-npm run test:unit //for unit testing
-npm run allure //to open allure report
+npm run test:e2e #for e2e testing
+npm run test:unit #for unit testing
+npm run allure #to open allure report
 ```
 
 
 ## Flow
-- Users add their description and links to movies they like, then submit.
+- First, Users add their description and imdb links to movies they like, then submit.
 - #### **The user input is being validated**:
     - Using prompt engineering techniques, we verify that the prompt is not harmful or malicious and that the user is not trying to exploit the system
     - Limits the number of characters in the description to prevent the user from sending too much data
@@ -100,6 +100,7 @@ npm run allure //to open allure report
 - **User management**: for login\signup and personal recommendations and personal history 
 - **Deployment and CI/CD**: Implement a CI/CD pipeline to automate the deployment process. 
 - **Enhanced Security**: Verify that the URLs user provided are not malicious before the system will use those, it can be done by leveraging Google Safe Browsing API, its for cases that the user bypassed the prompt validation and injected malicious data in the links.
+- **Using AWS parameter store for secrets**: For better security, the system should use AWS parameter store to store the secrets and not in the .env file/in the ec2 instance.
 - **Integrate IMDB API**: Currently the movie data is being taken from the IMDB html. I would like to use the IMDB API to get the data in a more structured way and to avoid the need to parse the html which can be problematic.
 - **Redis for history caching**: Currently the system stores the history in MongoDB. I would like to use Redis for caching the recommendations and the history to improve the performance.
 - **Elastic DB for storing the embeddings**: Currently the system stores the embeddings in the memory. I would like to use Elastic DB to store the embeddings and to be able to scale the system. This way the system will be able to handle more data and more users. As the embedding will be stored in the Elastic DB, the system will be able to retrieve the embeddings faster.
