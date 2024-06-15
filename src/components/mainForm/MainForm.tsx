@@ -3,7 +3,7 @@ import { Grid } from '@mui/material';
 import React, { useState } from 'react';
 
 import ImdbLinkList from './ImdbLinkList';
-import RenderMovieRecommendation from './LoadingOrRecommendations';
+import RenderMovieRecommendation from './RenderMovieRecommendation';
 import { appColor, gridContainerStyles, StyledBox } from './styles/movieSuggestionFormStyles';
 import WelcomeMessage from './WelcomeMessage';
 import FormContainer from '@app/components/base/FormContainer';

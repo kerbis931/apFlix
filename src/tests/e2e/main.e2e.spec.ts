@@ -24,9 +24,9 @@ test.describe('Main Form', () => {
   });
 
   test('should display correct history item', async ({ page }) => {
+    const otherUserInput = 'horror movie';
     await page.reload();
-    await fillPreferencesAndSubmit(page, userInput);
-    await page.reload();
-    await verifyCorrectHistoryItem(page, userInput);
+    await fillPreferencesAndSubmit(page, otherUserInput);
+    await verifyCorrectHistoryItem(page, otherUserInput);
   });
 });

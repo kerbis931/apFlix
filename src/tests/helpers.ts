@@ -7,7 +7,7 @@ export async function slowFill(page: Page, selector: string, text: string) {
 
 export async function slowClick(page: Page, selector: string) {
   await page.click(selector);
-  await page.waitForTimeout(2000); // wait for 2 seconds for demo purposes
+  await page.waitForTimeout(1500); // wait for 1.5 seconds for demo purposes
 }
 
 export async function fillPreferencesAndSubmit(page: Page, userInput: string) {
@@ -19,6 +19,10 @@ export async function fillPreferencesAndSubmit(page: Page, userInput: string) {
   });
   await test.step('Click the suggest button', async () => {
     await slowClick(page, submitRecommendationButton);
+  });
+  await test.step('Wait for recommendation text', async () => {
+    await waitForRecommendationText(page);
+    await page.waitForTimeout(1000); // wait for 1 second for demo purposes
   });
 }
 
@@ -61,4 +65,8 @@ export async function verifyCorrectHistoryItem(page: Page, userInput: string) {
     const historyModal = page.locator(historyModalLocator);
     await expect(historyModal, { message: errorMsg }).toContainText(userInput, { timeout: 10000 });
   });
+}
+
+async function waitForRecommendationText(page: Page) {
+  await page.waitForSelector('text=Recommendation:', { timeout: 10000 });
 }
