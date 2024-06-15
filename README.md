@@ -58,7 +58,7 @@ npm run allure #to open allure report
 
 
 ## Flow
-- First, Users add their description and imdb links to movies they like, then submit.
+- **First**, Users add their description and imdb links to movies they like, then submit.
 - #### **The user input is being validated**:
     - Using prompt engineering techniques, we verify that the prompt is not harmful or malicious and that the user is not trying to exploit the system
     - Limits the number of characters in the description to prevent the user from sending too much data
