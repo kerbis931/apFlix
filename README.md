@@ -10,6 +10,7 @@ Welcome to APFLIX!
 APFLIX is a movie recommendation assistant that helps users find movies based on their preferences. Users can provide a description of what they're looking for and share IMDb links to movies they're interested in order to enrich the recommendations since the system holds pre defined data updated up to 2022.
 More than that, user can overview the general history of recommendations.
 The view is integrated with movie thumbnails from OMDB API.
+The webApp fits both desktop and mobile devices.
 
 <img src="./public/demo.gif" alt="gif" width="240"/>
 
@@ -17,7 +18,7 @@ The view is integrated with movie thumbnails from OMDB API.
 - [Specifications](#Specifications)
 - [Development](#Development)
 - [Flow](#Flow)
-   - [User Input Validation](#User-Input-Validation)
+   - [User Input Validation](#The-user-input-is-being-validated)
   - [Data Processing](#Data-Processing)
   - [Recommendations](#Recommendations)
   - [History](#History)
