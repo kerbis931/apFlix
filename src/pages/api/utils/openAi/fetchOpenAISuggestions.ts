@@ -9,8 +9,9 @@ import { splitHtmlDocuments } from './htmlHelpers';
 import { getMainMovieRecommendationPrompt } from './systemPromptsWrappers';
 import { moviesList } from '@app/pages/api/data/moviesList';
 
+const openAIModelName = 'gpt-4';
 export const model = new ChatOpenAI({
-  modelName: 'gpt-4',
+  modelName: openAIModelName,
   temperature: 0.0
 });
 

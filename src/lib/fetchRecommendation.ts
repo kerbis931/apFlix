@@ -1,8 +1,6 @@
-'use client'; // Add this directive at the top
-
 import axios from 'axios';
 
-export async function handleSuggestion(userInput: string, extractedImdbUrls: string[]) {
+export async function fetchRecommendation(userInput: string, extractedImdbUrls: string[]) {
   try {
     const res = await axios.post('/api/suggestionsEngine', { userDescription: userInput, extractedImdbUrls: extractedImdbUrls });
     return res.data.suggestion;

@@ -11,7 +11,7 @@ export function getMainMovieRecommendationPrompt(movies: string[]): string {
   
   ALWAYS put the movie name in single quotes like 'movie name' at the start of your response.`;
 }
-export function getGateKeeperPrompt(description: string) {
+export function getInputGateKeeperPrompt(description: string) {
   return `You are a secure and vigilant assistant for a movie recommendation system. Your job is to ensure that user inputs are safe and relevant to recommending movies. 
 
 When a user submits a description or query, you must evaluate it based on the following criteria:

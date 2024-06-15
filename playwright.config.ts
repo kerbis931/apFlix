@@ -6,7 +6,7 @@ export default defineConfig({
   expect: {
     timeout: 5000
   },
-  fullyParallel: true,
+  fullyParallel: false, // since we write to db, we need to run tests sequentially. otherwise, we might overwrite data
   retries: 1,
   reporter: [['list'], ['json', { outputFile: './report/test-results.json' }], ['html', { outputFolder: './report/html', open: 'always' }], ['allure-playwright', { outputFolder: './report/allure-results' }]],
   outputDir: './report/test-results',

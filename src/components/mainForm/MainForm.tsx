@@ -12,8 +12,8 @@ import SubmitButton from '@app/components/base/SubmitButton';
 import TypographyText from '@app/components/base/TypographyText';
 import { RecommendationHistory } from '@app/components/history/RecommendationHistory';
 import { useMovieForm } from '@app/hooks/useMovieForm';
-import { getHistory } from '@app/lib/getHistory';
-import { handleSuggestion } from '@app/lib/handleSuggestion';
+import { fetchHistory } from '@app/lib/fetchHistory';
+import { fetchRecommendation } from '@app/lib/fetchRecommendation';
 
 const MovieSuggestionForm: React.FC = () => {
   const [userInput, setUserInput] = useState('');
@@ -23,9 +23,9 @@ const MovieSuggestionForm: React.FC = () => {
 
   const handleSuggestClick = async () => {
     setLoading(true);
-    const suggestion = await handleSuggestion(userInput, extractedImdbUrls);
+    const suggestion = await fetchRecommendation(userInput, extractedImdbUrls);
     setResponse(suggestion);
-    const historyResponse = await getHistory();
+    const historyResponse = await fetchHistory();
     setHistory((historyResponse && historyResponse.data.history) || []);
     setLoading(false);
   };

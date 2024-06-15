@@ -27,6 +27,8 @@ test.describe('Main Form', () => {
     const otherUserInput = 'horror movie';
     await page.reload();
     await fillPreferencesAndSubmit(page, otherUserInput);
+    await page.waitForTimeout(2000); // wait for 1 second for demo purposes
+    await page.reload();
     await verifyCorrectHistoryItem(page, otherUserInput);
   });
 });

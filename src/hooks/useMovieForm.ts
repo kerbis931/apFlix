@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 
 import { RecommendationsHistoryItem } from '@app/components/types/RecommendationsHistoryItem';
-import { getHistory } from '@app/lib/getHistory';
+import { fetchHistory } from '@app/lib/fetchHistory';
 
 export const useMovieForm = (userInput: string, response: string) => {
   const [history, setHistory] = useState<RecommendationsHistoryItem[]>([]);
   const [extractedImdbUrls, setExtractedImdbUrls] = useState<string[]>([]);
 
   useEffect(() => {
-    const fetchHistory = async () => {
-      const res = await getHistory();
+    const historyFetcher = async () => {
+      const res = await fetchHistory();
       setHistory((res && res.data.history) || []);
     };
-    fetchHistory();
+    historyFetcher();
   }, [response]);
 
   useEffect(() => {
