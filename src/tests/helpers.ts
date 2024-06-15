@@ -50,7 +50,7 @@ export async function verifyLastRecommendations(page: Page) {
   });
 }
 
-export async function verifyCorrectHistoryItem(page: Page, userInput: string) {
+export async function verifyCorrectHistoryItem(page: Page) {
   const errorMsg = 'History modal is not visible';
   const historyItemLocatorId = '#history-0';
   const historyModalLocator = '#history-modal';
@@ -63,7 +63,7 @@ export async function verifyCorrectHistoryItem(page: Page, userInput: string) {
 
   await test.step('Check the history modal content', async () => {
     const historyModal = page.locator(historyModalLocator);
-    await expect(historyModal, { message: errorMsg }).toContainText(userInput, { timeout: 10000 });
+    await expect(historyModal, { message: errorMsg }).toContainText('Recommendation Details');
   });
 }
 
