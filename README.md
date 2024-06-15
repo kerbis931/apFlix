@@ -77,7 +77,7 @@ npm run allure #to open allure report
             - compute the recommendations via the language model based on the new data + the pre-defined data
     - **In case the user didn't provide links**, the system will recommend movies based on the description using its pre-defined movie list(past 2022)
 - #### **Recommendations**:
-    - Validates that the response was successful and that the user received the recommendations that match his preferences
+    - Before return response to the user, we validate that the response was successful and that the user received the recommendations that match his preferences
     - Displays the recommendations to the user and attach the movie thumbnails from OMDB API
 - #### **History**:
   - Store recommendations history in MongoDB.
