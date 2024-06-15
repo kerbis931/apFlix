@@ -35,7 +35,7 @@ The webApp fits both desktop and mobile devices.
 - MongoDB - for storing recommendations history
 
 ## Development
-1. Clone the repository 
+1. Clone the repository `git clone git@github.com:kerbis931/apFlix.git`
 2. Fill the keys in `.env` for 
 ```bash
 OPENAI_API_KEY=ADD_YOUR_OPEN_AI #For LLM recommendations
