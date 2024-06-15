@@ -2,9 +2,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const defaultThumbnail = 'https://via.placeholder.com/50x75';
-const thumbnailProviderKey = process.env.OMDB_API_KEY || 'YOUR_API_KEY';
-const MAX_RETRIES = 3;
-const RETRY_DELAY = 1000;
 
 export const useMovieThumbnail = (movieName: string) => {
   const [thumbnail, setThumbnail] = useState<string>(defaultThumbnail);
@@ -13,32 +10,17 @@ export const useMovieThumbnail = (movieName: string) => {
 
   useEffect(() => {
     const fetchThumbnail = async () => {
-      let attempts = 0;
-      let success = false;
-
-      while (attempts < MAX_RETRIES && !success) {
-        try {
-          const thumbnailApiUrl = `https://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${thumbnailProviderKey}`;
-          const response = await axios.get(thumbnailApiUrl);
-          if (response.data.Poster) {
-            setThumbnail(response.data.Poster);
-            success = true;
-          } else {
-            attempts++;
-            await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
-          }
-        } catch (err) {
-          console.error('Error fetching movie thumbnail:', err);
-          attempts++;
-          await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
-        }
-      }
-
-      if (!success) {
+      setLoading(true);
+      setError(false);
+      try {
+        const response = await axios.get(`/api/fetchThumbnail`, { params: { movieName } });
+        setThumbnail(response.data.thumbnail);
+      } catch (err) {
+        console.error('Error fetching movie thumbnail:', err);
         setError(true);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     };
 
     fetchThumbnail();
