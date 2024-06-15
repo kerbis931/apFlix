@@ -1,7 +1,9 @@
 export function getMainMovieRecommendationPrompt(movies: string[]): string {
-  return `Please suggest a movie based on my description from the following list:
-  You can also refer to the "context"(which includes the pageContent and the movieName) section below for additional movie recommendations.
-  PLEASE to recommend any movie from these sections, even if it's not listed here:
+  return `Please suggest a movie based on my description from the following lists:
+  
+  You can also refer to the "context"(which includes the pageContent and the movieName) section below for additional movie recommendations OR to the "Other movies" section for more options.
+  PLEASE recommend on any movie from these sections. if it's not listed in the "Other movies" section or the "context" section, it's not a valid suggestion.
+
   
   Here is the users description: {input}
   context: {context}
@@ -9,7 +11,8 @@ export function getMainMovieRecommendationPrompt(movies: string[]): string {
   Other movies:
   \n${movies.join(', ')}
   
-  ALWAYS put the movie name in single quotes like 'movie name' at the start of your response.`;
+  Important! ALWAYS put the movie name in single quotes like 'movie name' at the start of your response.
+  Use only one pair of single quotes in the response and make sure the movie name is inside the single quotes. `;
 }
 export function getInputGateKeeperPrompt(description: string) {
   return `You are a secure and vigilant assistant for a movie recommendation system. Your job is to ensure that user inputs are safe and relevant to recommending movies. 

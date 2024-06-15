@@ -11,7 +11,8 @@ import InputField from '@app/components/base/InputField';
 import SubmitButton from '@app/components/base/SubmitButton';
 import TypographyText from '@app/components/base/TypographyText';
 import { RecommendationHistory } from '@app/components/history/RecommendationHistory';
-import { useMovieForm } from '@app/hooks/useMovieForm';
+import { useExtractImdbUrls } from '@app/hooks/useExtractImdbUrls';
+import { useFetchHistory } from '@app/hooks/useFetchHistory';
 import { fetchHistory } from '@app/lib/fetchHistory';
 import { fetchRecommendation } from '@app/lib/fetchRecommendation';
 
@@ -19,7 +20,8 @@ const MovieSuggestionForm: React.FC = () => {
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
-  const { history, extractedImdbUrls, setHistory } = useMovieForm(userInput, response);
+  const { history, setHistory } = useFetchHistory(response);
+  const { extractedImdbUrls } = useExtractImdbUrls(userInput);
 
   const handleSuggestClick = async () => {
     setLoading(true);

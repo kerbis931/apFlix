@@ -24,8 +24,8 @@ export const fetchOpenAISuggestionsUsingEmbedding = async (userDescription: stri
     prompt: finalPrompt
   });
 
-  const vectors = await createEmbeddings(documents);
-  const retriever = vectors.asRetriever({
+  const vectorStore = await createEmbeddings(documents);
+  const retriever = vectorStore.asRetriever({
     k: 1
   });
 

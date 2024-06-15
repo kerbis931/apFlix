@@ -8,9 +8,6 @@ export function HistoryItem({ open, handleClose, selectedItem }: { open: boolean
       <DialogTitle id="description-dialog-title">Recommendation Details</DialogTitle>
       <DialogContent>
         <Typography variant="body1">
-          <strong>Description:</strong> {selectedItem?.userDescription}
-        </Typography>
-        <Typography variant="body1">
           <strong>Suggestion:</strong> {selectedItem?.suggestion}
         </Typography>
       </DialogContent>
